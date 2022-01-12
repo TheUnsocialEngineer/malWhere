@@ -8,7 +8,7 @@ import base64
 #import pyautogui
 import getpass
 
-encryptedapi="base64 encoded api key>="
+encryptedapi="<base64 encoded api key>="
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
