@@ -106,6 +106,7 @@ async def pcinfo(ctx):
     embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
     #embed.add_field(name="battery status", value=f"Battery Percentage is {percent}% Batter Plugged in =  {plugged}")
     await ctx.send(embed=embed)
+    await ctx.message.delete()
   await ctx.channel.send("wrong channel skid")
 
 
