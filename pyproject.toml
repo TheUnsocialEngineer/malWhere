@@ -9,6 +9,7 @@ python = "^3.8"
 python-dotenv = "^0.19.2"
 discord = "^1.7.3"
 PyAutoGUI = "^0.9.53"
+psutil = "^5.9.0"
 
 [tool.poetry.dev-dependencies]
 

