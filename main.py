@@ -93,8 +93,5 @@ mediachan=malWhere.get_channel(channel_id)
 mediachan.send(image="tempimage.png")
 #############################################################################
 
-@malWhere.command()
-async def 
-
 
 malWhere.run(TOKEN)
