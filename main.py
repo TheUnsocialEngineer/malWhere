@@ -10,7 +10,7 @@ import getpass
 import psutil
 import PIL
 
-encryptedapi="aHR0cHM6Ly9nb2RzZXllLmZyZWUuYmVlY2VwdG9yLmNvbS8="
+encryptedapi="<base64 encoded api key>"
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
