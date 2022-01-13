@@ -121,7 +121,6 @@ async def pcinfo(ctx):
       await ctx.channel.send("wrong channel skid")
   except:
     ctx.message.send("An Error Has Occured Please Try Again")
-  
 
 @malWhere.command():
 async def rickroll(ctx):
