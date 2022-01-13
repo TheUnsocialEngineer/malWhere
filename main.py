@@ -125,7 +125,7 @@ async def pcinfo(ctx):
 @malWhere.command()
 async def rickroll(ctx):
   try:
-    existing_chrome="C:/Users/{getpass.getuser()}/AppData/Local/Google/Chrome"
+    existing_chrome=f"C:/Users/{getpass.getuser()}/AppData/Local/Google/Chrome"
     if existing_chrome:
       os.popen("start chrome.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
@@ -133,15 +133,15 @@ async def rickroll(ctx):
     if existing_opera:
       os.popen("start opera.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
-    existing_firefox="C:/Users/{getpass.getuser()}/AppData/Local/Mozilla/Firefox"
+    existing_firefox=f"C:/Users/{getpass.getuser()}/AppData/Local/Mozilla/Firefox"
     if existing_firefox:
       os.popen("start firefox.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
-    existing_brave="C:/Users/jorda/AppData/Local/BraveSoftware/Brave-Browser"
+    existing_brave=f"C:/Users/{getpass.getuser()}/AppData/Local/BraveSoftware/Brave-Browser"
     if existing_brave:
       os.popen("start brave.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
-    existing_edge="C:/Users/{getpass.getuser()}/AppData/Local/Microsoft/Edge"
+    existing_edge=f"C:/Users/{getpass.getuser()}/AppData/Local/Microsoft/Edge"
     if existing_edge:
       os.popen("start MicrosoftEdge.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
