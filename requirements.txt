@@ -1,0 +1,9 @@
+os
+requests
+discord
+json
+base64
+pyautogui
+getpass
+psutil
+PIL
