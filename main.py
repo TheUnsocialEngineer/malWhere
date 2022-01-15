@@ -122,6 +122,7 @@ async def screenshot(ctx):
       picture = discord.File(f)
       mediachan=malWhere.get_channel(channel_id)
       await mediachan.send(file=picture)
+      await ctx.message.delete()
   except Exception as e:
     await ctx.send(f"An Error Has Occured Please Try Again {e}")
     await ctx.message.delete()
