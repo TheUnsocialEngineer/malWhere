@@ -2,12 +2,9 @@ requests
 discord
 pyautogui
 psutil
-PIL
 cv2
-threading
 sys
 pathlib
-random
 opencv-contrib-python
 shutil
 string
