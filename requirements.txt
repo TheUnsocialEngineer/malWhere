@@ -1,6 +1,5 @@
 requests
 discord
-json
 base64
 pyautogui
 getpass
