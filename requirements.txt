@@ -2,7 +2,6 @@ requests
 discord
 pyautogui
 psutil
-cv2
 sys
 pathlib
 opencv-contrib-python
