@@ -3,5 +3,4 @@ discord
 pyautogui
 pathlib
 opencv-contrib-python
-shutil
 string
