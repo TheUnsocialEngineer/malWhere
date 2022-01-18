@@ -1,10 +1,8 @@
 requests
 discord
 pyautogui
-getpass
 psutil
 PIL
-time
 cv2
 threading
 sys
