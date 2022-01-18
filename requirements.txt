@@ -7,3 +7,14 @@ pyautogui
 getpass
 psutil
 PIL
+from PIL  ImageGrab
+from functools  partial
+time
+cv2
+threading
+sys
+pathlib
+random
+opencv-contrib-python
+shutil
+string

