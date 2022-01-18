@@ -1,8 +1,6 @@
 requests
 discord
 pyautogui
-psutil
-sys
 pathlib
 opencv-contrib-python
 shutil
