@@ -7,8 +7,6 @@ pyautogui
 getpass
 psutil
 PIL
-from PIL  ImageGrab
-from functools  partial
 time
 cv2
 threading
