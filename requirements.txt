@@ -3,4 +3,3 @@ discord
 pyautogui
 pathlib
 opencv-contrib-python
-string
