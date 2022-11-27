@@ -99,7 +99,7 @@ async def help(ctx,type):
 async def geolocate(ctx):
   try:
     if str(ctx.channel)==(ip4chan):
-      r = requests.get(f'http://ipinfo.io/{ip}?token=51030d1b61679e')
+      r = requests.get(f'http://ipinfo.io/{ip}?token=')
       response=r.json()
       embed=discord.Embed(title="Location Data", url=f"https://www.google.com/maps/search/4{response['loc']}/@{response['loc']},17z", description=f"{ip}'s Location data", color=0xFF5733)
       embed.add_field(name="IP", value=ip, inline=False)
